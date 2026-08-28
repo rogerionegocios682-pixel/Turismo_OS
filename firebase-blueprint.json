@@ -1,0 +1,92 @@
+{
+  "entities": {
+    "Loja": {
+      "title": "Loja",
+      "description": "Unidade ou agência do sistema TurismoOS",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "nome": { "type": "string" },
+        "razaoSocial": { "type": "string" },
+        "cnpj": { "type": "string" },
+        "cidade": { "type": "string" },
+        "telefone": { "type": "string" },
+        "email": { "type": "string" },
+        "status": { "type": "string", "enum": ["ativa", "inativa"] },
+        "criadoEm": { "type": "string" }
+      },
+      "required": ["id", "nome", "status"]
+    },
+    "UsuarioAuth": {
+      "title": "UsuarioAuth",
+      "description": "Usuário autenticado do sistema multi-loja ou master",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "nome": { "type": "string" },
+        "email": { "type": "string" },
+        "usuarioLogin": { "type": "string" },
+        "senha": { "type": "string" },
+        "perfil": { "type": "string", "enum": ["master", "admin_loja", "operador_loja"] },
+        "store_id": { "type": "string" },
+        "nomeLoja": { "type": "string" },
+        "status": { "type": "string", "enum": ["ativo", "inativo"] },
+        "ultimoAcesso": { "type": "string" }
+      },
+      "required": ["id", "nome", "email", "usuarioLogin", "senha", "perfil", "store_id", "status"]
+    },
+    "Reserva": {
+      "title": "Reserva",
+      "description": "Reserva de passeio e voucher",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "store_id": { "type": "string" },
+        "codigoVoucher": { "type": "string" },
+        "agenciaEmissora": { "type": "string" },
+        "dataEmissao": { "type": "string" },
+        "clienteNome": { "type": "string" },
+        "clienteTelefoneWhatsapp": { "type": "string" },
+        "passeioId": { "type": "string" },
+        "passeioNome": { "type": "string" },
+        "dataPasseio": { "type": "string" },
+        "qntAdultos": { "type": "number" },
+        "qntCriancas": { "type": "number" },
+        "valorTotal": { "type": "number" },
+        "valorSinalPago": { "type": "number" },
+        "valorSaldoRestante": { "type": "number" },
+        "status": { "type": "string" },
+        "statusEmbarque": { "type": "string" }
+      },
+      "required": ["id", "codigoVoucher", "clienteNome", "passeioNome", "dataPasseio"]
+    },
+    "GlobalData": {
+      "title": "GlobalData",
+      "description": "Armazenamento estruturado de sincronização em tempo real do TurismoOS",
+      "type": "object",
+      "properties": {
+        "lojas": { "type": "array" },
+        "usuarios": { "type": "array" },
+        "passeios": { "type": "array" },
+        "motoristas": { "type": "array" },
+        "vendedores": { "type": "array" },
+        "reservas": { "type": "array" },
+        "transacoes": { "type": "array" },
+        "fechamentos": { "type": "array" },
+        "telemetria": { "type": "array" },
+        "tabuaMares": { "type": "array" },
+        "updatedAt": { "type": "string" }
+      }
+    }
+  },
+  "firestore": {
+    "/turismo_os/global_data": {
+      "schema": "GlobalData",
+      "description": "Estado global sincronizado em tempo real entre todos os dispositivos"
+    },
+    "/turismo_os/{collectionDoc}": {
+      "schema": "GlobalData",
+      "description": "Sub-documentos granulares de sincronização em tempo real"
+    }
+  }
+}

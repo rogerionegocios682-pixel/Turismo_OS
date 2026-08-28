@@ -1,0 +1,6 @@
+{
+  "name": "TurismoOS - Sistema de Gestão de Passeios e Receptivo",
+  "description": "Plataforma profissional de gestão para agências de passeios, transfers e receptivos em Porto de Galinhas e Litoral Nordestino. Controle de reservas, sinais/saldos, vouchers A4/térmicos, rota de motoristas, tábua de marés e fechamento de caixa.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
