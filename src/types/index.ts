@@ -240,9 +240,10 @@ export interface TelemetriaColaborador {
 
 // -------------------------------------------------------------
 // NOVO: ESTRUTURA DE AUTENTICAÇÃO MULTI-LOJA & ACESSO MASTER
+// & VENDEDORES COM ACESSO RESTRITO
 // -------------------------------------------------------------
 
-export type PerfilAcesso = 'master' | 'admin_loja' | 'operador_loja';
+export type PerfilAcesso = 'master' | 'admin_loja' | 'operador_loja' | 'vendedor';
 
 export interface Loja {
   id: string; // Ex: 'LOJA_001', 'LOJA_002', 'LOJA_003'
@@ -263,9 +264,11 @@ export interface UsuarioAuth {
   email: string;
   usuarioLogin: string; // Username para login
   senha: string; // Senha para validação
-  perfil: PerfilAcesso; // 'master' | 'admin_loja' | 'operador_loja'
+  perfil: PerfilAcesso; // 'master' | 'admin_loja' | 'operador_loja' | 'vendedor'
   store_id: string; // 'ALL' para Master ou 'LOJA_001', 'LOJA_002', etc.
   nomeLoja?: string;
   status: 'ativo' | 'inativo';
   ultimoAcesso?: string;
+  vendedorId?: string; // ID do vendedor cadastrado (quando perfil = 'vendedor')
+  comissaoPct?: number; // Percentual de comissão do vendedor
 }
