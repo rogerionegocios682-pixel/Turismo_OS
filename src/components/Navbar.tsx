@@ -9,7 +9,8 @@ import {
   Tag,
   Wallet,
   Building2,
-  Radio
+  Radio,
+  Users
 } from 'lucide-react';
 
 interface TabItem {
@@ -45,6 +46,7 @@ export const Navbar: React.FC = () => {
       badgeCount: emMovimentoCount > 0 ? emMovimentoCount : undefined 
     },
     { id: 'frota', label: 'Frota & Guias', icon: Car },
+    { id: 'frota_vendedores', label: 'Vendedores', icon: Users },
     { id: 'mares', label: 'Tábua de Marés', icon: Waves },
     { id: 'tarifario', label: 'Tarifário de Passeios', icon: Tag },
     { id: 'caixa', label: 'Caixa & Comissões', icon: Wallet },
