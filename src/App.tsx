@@ -9,6 +9,7 @@ import { RotaMotoristaView } from './components/Rota/RotaMotoristaView';
 import { RastreioColaboradoresView } from './components/Rastreio/RastreioColaboradoresView';
 import { TabuaMaresView } from './components/Mares/TabuaMaresView';
 import { FrotaMotoristasView } from './components/Frota/FrotaMotoristasView';
+import { FrotaVendedoresView } from './components/Frota/FrotaVendedoresView';
 import { TarifarioView } from './components/Tarifario/TarifarioView';
 import { CaixaComissoesView } from './components/Financeiro/CaixaComissoesView';
 import { EmpresaConfigView } from './components/Empresa/EmpresaConfigView';
@@ -65,6 +66,8 @@ const AppContent: React.FC = () => {
         return <TabuaMaresView />;
       case 'frota':
         return <FrotaMotoristasView />;
+      case 'frota_vendedores':
+        return <FrotaVendedoresView />;
       case 'tarifario':
         return <TarifarioView />;
       case 'caixa':
