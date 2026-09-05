@@ -54,6 +54,11 @@ export interface PromotorVendedor {
   telefone: string;
   chavePix?: string;
   ativo: boolean;
+  // Dados de acesso individual do vendedor (login próprio ao PDV)
+  cpfDocumento?: string;
+  email?: string;
+  usuarioLogin?: string; // Username/e-mail usado no login do vendedor
+  temAcesso?: boolean; // true quando existe usuário de acesso vinculado
 }
 
 export type StatusReserva = 'confirmada' | 'pendente_pagamento' | 'embarcado' | 'concluida' | 'cancelada' | 'no_show';

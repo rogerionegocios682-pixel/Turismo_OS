@@ -1,185 +1,170 @@
 import React, { useState, useMemo } from 'react';
 import toast from 'react-hot-toast';
 import { useTurismo } from '../../context/TurismoContext';
+import { formatarMoeda } from '../../utils/formatters';
 import {
   User,
   Plus,
   Edit,
   Trash2,
   TrendingUp,
-  DollarSign,
   Users,
   Trophy,
   Filter,
-  BarChart3,
-  Phone
+  Phone,
+  Store,
+  Lock,
+  Eye,
+  EyeOff,
+  ShieldCheck,
+  Calendar,
+  KeyRound
 } from 'lucide-react';
-
-interface Vendedor {
-  id: string;
-  nomeVendedor: string;
-  telefone: string;
-  email: string;
-  percentualComissao: number;
-  status: 'ativo' | 'inativo';
-  empresaId: string;
-  dataCadastro: string;
-  saldoComissoes?: number;
-  totalVendas?: number;
-  totalSinais?: number;
-}
-
-interface VendaRegistro {
-  id: string;
-  vendedorId: string;
-  dataVenda: string;
-  tipoServico: string;
-  valorVenda: number;
-  comissaoRecebida: number;
-  observacoes?: string;
-}
+import { PromotorVendedor } from '../../types';
 
 export const FrotaVendedoresView: React.FC = () => {
-  const { empresaConfig } = useTurismo();
+  const {
+    vendedores,
+    usuariosSistema,
+    reservas,
+    lojaAtiva,
+    cadastrarVendedorComAcesso,
+    atualizarVendedorComAcesso,
+    excluirVendedorComAcesso
+  } = useTurismo();
 
-  const [vendedores, setVendedores] = useState<Vendedor[]>([]);
-  const [vendas, setVendas] = useState<VendaRegistro[]>([]);
   const [modalAberto, setModalAberto] = useState(false);
-  const [vendedorEditando, setVendedorEditando] = useState<Vendedor | null>(null);
+  const [vendedorEditando, setVendedorEditando] = useState<PromotorVendedor | null>(null);
   const [filtroStatus, setFiltroStatus] = useState<'todos' | 'ativo' | 'inativo'>('todos');
   const [filtroVendedor, setFiltroVendedor] = useState<string>('todos');
 
   // Form states
-  const [nomeVendedor, setNomeVendedor] = useState('');
+  const [nome, setNome] = useState('');
+  const [cpfDocumento, setCpfDocumento] = useState('');
   const [telefone, setTelefone] = useState('');
   const [email, setEmail] = useState('');
-  const [percentualComissao, setPercentualComissao] = useState(5);
-  const [status, setStatus] = useState<'ativo' | 'inativo'>('ativo');
+  const [senha, setSenha] = useState('');
+  const [mostrarSenha, setMostrarSenha] = useState(false);
+  const [comissaoPct, setComissaoPct] = useState(5);
+  const [statusAtivo, setStatusAtivo] = useState(true);
 
-  // Calcular vendedores filtrados
+  // Estatísticas de reservas por vendedor (loja ativa)
+  const statsPorVendedor = useMemo(() => {
+    const mapa: Record<string, { qtd: number; total: number; ultima?: string }> = {};
+    reservas.forEach(r => {
+      if (!r.vendedorId || r.status === 'cancelada') return;
+      if (!mapa[r.vendedorId]) mapa[r.vendedorId] = { qtd: 0, total: 0 };
+      mapa[r.vendedorId].qtd += 1;
+      mapa[r.vendedorId].total += r.valorTotal || 0;
+      const dt = r.dataEmissao;
+      if (dt && (!mapa[r.vendedorId].ultima || dt > mapa[r.vendedorId].ultima!)) {
+        mapa[r.vendedorId].ultima = dt;
+      }
+    });
+    return mapa;
+  }, [reservas]);
+
   const vendedoresFiltrados = useMemo(() => {
     return vendedores.filter(v => {
-      if (filtroStatus !== 'todos' && v.status !== filtroStatus) return false;
+      const st = v.ativo ? 'ativo' : 'inativo';
+      if (filtroStatus !== 'todos' && st !== filtroStatus) return false;
       if (filtroVendedor !== 'todos' && v.id !== filtroVendedor) return false;
       return true;
     });
   }, [vendedores, filtroStatus, filtroVendedor]);
 
-  // Calcular ranking dos 5 maiores vendedores
   const rankingVendedores = useMemo(() => {
-    const vendedoresComDados = vendedores.map(v => {
-      const vendedorVendas = vendas.filter(vd => vd.vendedorId === v.id);
-      const totalComissoes = vendedorVendas.reduce((sum, vd) => sum + vd.comissaoRecebida, 0);
-      const totalVendas = vendedorVendas.length;
-
-      return {
-        ...v,
-        saldoComissoes: totalComissoes,
-        totalVendas: totalVendas,
-        totalSinais: totalVendas // Por hora, considerando como sinais
-      };
-    });
-
-    return vendedoresComDados
-      .sort((a, b) => (b.saldoComissoes || 0) - (a.saldoComissoes || 0))
+    return vendedores
+      .map(v => ({ vendedor: v, stats: statsPorVendedor[v.id] || { qtd: 0, total: 0 } }))
+      .sort((a, b) => b.stats.total - a.stats.total)
       .slice(0, 5);
-  }, [vendedores, vendas]);
+  }, [vendedores, statsPorVendedor]);
 
-  // Modal handlers
-  const abrirModalNovo = () => {
-    setVendedorEditando(null);
-    setNomeVendedor('');
+  const formatarDataHora = (iso?: string) => {
+    if (!iso) return '—';
+    try {
+      return new Date(iso).toLocaleString('pt-BR', {
+        day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit'
+      });
+    } catch {
+      return '—';
+    }
+  };
+
+  const usuarioDoVendedor = (vendedorId: string) =>
+    usuariosSistema.find(u => u.perfil === 'vendedor' && u.vendedorId === vendedorId);
+
+  const limparForm = () => {
+    setNome('');
+    setCpfDocumento('');
     setTelefone('');
     setEmail('');
-    setPercentualComissao(5);
-    setStatus('ativo');
+    setSenha('');
+    setMostrarSenha(false);
+    setComissaoPct(5);
+    setStatusAtivo(true);
+  };
+
+  const abrirModalNovo = () => {
+    setVendedorEditando(null);
+    limparForm();
     setModalAberto(true);
   };
 
-  const abrirModalEditar = (v: Vendedor) => {
+  const abrirModalEditar = (v: PromotorVendedor) => {
     setVendedorEditando(v);
-    setNomeVendedor(v.nomeVendedor);
-    setTelefone(v.telefone);
-    setEmail(v.email);
-    setPercentualComissao(v.percentualComissao);
-    setStatus(v.status);
+    const usr = usuarioDoVendedor(v.id);
+    setNome(v.nome);
+    setCpfDocumento(v.cpfDocumento || '');
+    setTelefone(v.telefone || '');
+    setEmail(v.email || usr?.email || '');
+    setSenha('');
+    setMostrarSenha(false);
+    setComissaoPct(v.comissaoPadraoPct);
+    setStatusAtivo(v.ativo);
     setModalAberto(true);
   };
 
   const handleSalvar = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!nomeVendedor || !telefone || !email) {
-      toast.error('Preencha todos os campos obrigatórios');
+    if (!nome.trim() || !telefone.trim() || !email.trim()) {
+      toast.error('Preencha nome, telefone e e-mail/usuário.');
       return;
     }
 
     if (vendedorEditando) {
-      setVendedores(vendedores.map(v =>
-        v.id === vendedorEditando.id
-          ? {
-              ...v,
-              nomeVendedor,
-              telefone,
-              email,
-              percentualComissao,
-              status
-            }
-          : v
-      ));
-      toast.success(`Vendedor ${nomeVendedor} atualizado com sucesso!`, {
-        icon: '✅'
+      const res = atualizarVendedorComAcesso(vendedorEditando.id, {
+        nome, cpfDocumento, telefone, email, senha, comissaoPct, ativo: statusAtivo
       });
+      if (!res.sucesso) {
+        toast.error(res.mensagem || 'Não foi possível atualizar o vendedor.');
+        return;
+      }
+      toast.success(`Vendedor ${nome} atualizado com sucesso!`, { icon: '✅' });
     } else {
-      const novoVendedor: Vendedor = {
-        id: Date.now().toString(),
-        nomeVendedor,
-        telefone,
-        email,
-        percentualComissao,
-        status,
-        empresaId: empresaConfig?.id || 'padrao',
-        dataCadastro: new Date().toLocaleDateString('pt-BR'),
-        saldoComissoes: 0,
-        totalVendas: 0,
-        totalSinais: 0
-      };
-      setVendedores([...vendedores, novoVendedor]);
-      toast.success(`Vendedor ${nomeVendedor} cadastrado com sucesso!`, {
-        icon: '👤'
+      if (!senha.trim()) {
+        toast.error('Defina uma senha de acesso para o vendedor.');
+        return;
+      }
+      const res = cadastrarVendedorComAcesso({
+        nome, cpfDocumento, telefone, email, senha, comissaoPct, ativo: statusAtivo
       });
+      if (!res.sucesso) {
+        toast.error(res.mensagem || 'Não foi possível cadastrar o vendedor.');
+        return;
+      }
+      toast.success(`Vendedor ${nome} cadastrado com acesso ao PDV!`, { icon: '👤' });
     }
 
     setModalAberto(false);
   };
 
-  const handleExcluir = (v: Vendedor) => {
-    if (window.confirm(`Deseja excluir o vendedor ${v.nomeVendedor}?`)) {
-      setVendedores(vendedores.filter(vend => vend.id !== v.id));
-      toast.success(`${v.nomeVendedor} foi removido.`, {
-        icon: '🗑️'
-      });
+  const handleExcluir = (v: PromotorVendedor) => {
+    if (window.confirm(`Deseja excluir o vendedor ${v.nome} e o seu acesso ao sistema?`)) {
+      excluirVendedorComAcesso(v.id);
+      toast.success(`${v.nome} e o acesso vinculado foram removidos.`, { icon: '🗑️' });
     }
-  };
-
-  const registrarVenda = (vendedorId: string, valor: number, tipo: string) => {
-    const vendedor = vendedores.find(v => v.id === vendedorId);
-    if (!vendedor) return;
-
-    const comissao = (valor * vendedor.percentualComissao) / 100;
-    const novaVenda: VendaRegistro = {
-      id: Date.now().toString(),
-      vendedorId,
-      dataVenda: new Date().toLocaleDateString('pt-BR'),
-      tipoServico: tipo,
-      valorVenda: valor,
-      comissaoRecebida: comissao
-    };
-
-    setVendas([...vendas, novaVenda]);
-    toast.success(`Venda registrada! Comissão: R$ ${comissao.toFixed(2)}`, {
-      icon: '💰'
-    });
   };
 
   return (
@@ -192,8 +177,14 @@ export const FrotaVendedoresView: React.FC = () => {
             <span>Gerenciamento de Vendedores</span>
           </h2>
           <p className="text-xs text-slate-500 mt-1">
-            Cadastre vendedores, acompanhe comissões e sinais no PDV
+            Cadastre vendedores com acesso individual ao PDV e acompanhe as reservas de cada um.
           </p>
+          {lojaAtiva && (
+            <p className="text-[11px] text-purple-700 font-semibold mt-1 flex items-center gap-1.5">
+              <Store className="w-3.5 h-3.5" />
+              Loja vinculada: {lojaAtiva.nome} ({lojaAtiva.id})
+            </p>
+          )}
         </div>
 
         <button
@@ -208,7 +199,7 @@ export const FrotaVendedoresView: React.FC = () => {
       {/* Filtros */}
       <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs flex flex-wrap gap-3 items-center">
         <Filter className="w-4 h-4 text-slate-500" />
-        
+
         <select
           value={filtroStatus}
           onChange={(e) => setFiltroStatus(e.target.value as any)}
@@ -226,7 +217,7 @@ export const FrotaVendedoresView: React.FC = () => {
         >
           <option value="todos">Todos os Vendedores</option>
           {vendedores.map(v => (
-            <option key={v.id} value={v.id}>{v.nomeVendedor}</option>
+            <option key={v.id} value={v.id}>{v.nome}</option>
           ))}
         </select>
 
@@ -235,20 +226,17 @@ export const FrotaVendedoresView: React.FC = () => {
         </div>
       </div>
 
-      {/* Ranking - Top 5 Vendedores */}
-      {rankingVendedores.length > 0 && (
+      {/* Ranking - Top 5 Vendedores por valor reservado */}
+      {rankingVendedores.some(r => r.stats.total > 0) && (
         <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-6 rounded-2xl border border-amber-200 shadow-xs">
           <div className="flex items-center gap-2 mb-4">
             <Trophy className="w-6 h-6 text-amber-600" />
-            <h3 className="text-lg font-black text-amber-900">Top 5 Maiores Vendedores</h3>
+            <h3 className="text-lg font-black text-amber-900">Top 5 Vendedores (Valor Reservado)</h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
-            {rankingVendedores.map((v, idx) => (
-              <div
-                key={v.id}
-                className="bg-white p-4 rounded-xl border border-amber-200 shadow-sm"
-              >
+            {rankingVendedores.map((rv, idx) => (
+              <div key={rv.vendedor.id} className="bg-white p-4 rounded-xl border border-amber-200 shadow-sm">
                 <div className="flex items-center justify-between mb-2">
                   <span className={`text-sm font-black w-8 h-8 flex items-center justify-center rounded-full ${
                     idx === 0 ? 'bg-amber-500 text-white' :
@@ -258,18 +246,14 @@ export const FrotaVendedoresView: React.FC = () => {
                   }`}>
                     {idx + 1}º
                   </span>
-                  <TrendingUp className={`w-4 h-4 ${
-                    idx === 0 ? 'text-amber-600' :
-                    idx === 1 ? 'text-slate-500' :
-                    'text-amber-700'
-                  }`} />
+                  <TrendingUp className="w-4 h-4 text-amber-600" />
                 </div>
-                <p className="text-xs font-bold text-slate-900 truncate">{v.nomeVendedor}</p>
+                <p className="text-xs font-bold text-slate-900 truncate">{rv.vendedor.nome}</p>
                 <p className="text-xs text-slate-500 mt-1">
-                  Comissões: <strong className="text-green-600">R$ {(v.saldoComissoes || 0).toFixed(2)}</strong>
+                  Reservado: <strong className="text-green-600">{formatarMoeda(rv.stats.total)}</strong>
                 </p>
                 <p className="text-xs text-slate-500">
-                  Sinais: <strong className="text-blue-600">{v.totalSinais || 0}</strong>
+                  Reservas: <strong className="text-blue-600">{rv.stats.qtd}</strong>
                 </p>
               </div>
             ))}
@@ -281,9 +265,9 @@ export const FrotaVendedoresView: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {vendedoresFiltrados.length > 0 ? (
           vendedoresFiltrados.map((v) => {
-            const vendedorVendas = vendas.filter(vd => vd.vendedorId === v.id);
-            const totalComissoes = vendedorVendas.reduce((sum, vd) => sum + vd.comissaoRecebida, 0);
-            const ranking = rankingVendedores.findIndex(rv => rv.id === v.id);
+            const stats = statsPorVendedor[v.id] || { qtd: 0, total: 0, ultima: undefined };
+            const usr = usuarioDoVendedor(v.id);
+            const ranking = rankingVendedores.findIndex(rv => rv.vendedor.id === v.id && rv.stats.total > 0);
 
             return (
               <div
@@ -296,13 +280,11 @@ export const FrotaVendedoresView: React.FC = () => {
                       <User className="w-5 h-5 text-purple-600" />
                     </div>
                     <div>
-                      <h3 className="font-extrabold text-base text-slate-900">{v.nomeVendedor}</h3>
+                      <h3 className="font-extrabold text-base text-slate-900">{v.nome}</h3>
                       <span className={`text-xs font-semibold px-2 py-1 rounded-full ${
-                        v.status === 'ativo'
-                          ? 'bg-green-100 text-green-800'
-                          : 'bg-red-100 text-red-800'
+                        v.ativo ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
                       }`}>
-                        {v.status === 'ativo' ? '✓ Ativo' : '✗ Inativo'}
+                        {v.ativo ? '✓ Ativo' : '✗ Inativo'}
                       </span>
                     </div>
                   </div>
@@ -314,51 +296,74 @@ export const FrotaVendedoresView: React.FC = () => {
                 </div>
 
                 <div className="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2 text-xs text-slate-600">
-                  <div className="flex justify-between">
-                    <span>Email:</span>
-                    <strong className="text-slate-900 truncate">{v.email}</strong>
+                  <div className="flex justify-between gap-2">
+                    <span>Acesso:</span>
+                    {usr ? (
+                      <strong className="text-slate-900 truncate flex items-center gap-1">
+                        <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                        @{usr.usuarioLogin}
+                      </strong>
+                    ) : (
+                      <strong className="text-amber-700">Sem login</strong>
+                    )}
                   </div>
+                  <div className="flex justify-between gap-2">
+                    <span>E-mail:</span>
+                    <strong className="text-slate-900 truncate">{v.email || usr?.email || '—'}</strong>
+                  </div>
+                  {v.cpfDocumento && (
+                    <div className="flex justify-between">
+                      <span>CPF/Doc:</span>
+                      <strong className="text-slate-900">{v.cpfDocumento}</strong>
+                    </div>
+                  )}
                   <div className="flex justify-between">
                     <span>Telefone:</span>
-                    <strong className="text-slate-900">{v.telefone}</strong>
+                    <strong className="text-slate-900">{v.telefone || '—'}</strong>
                   </div>
                   <div className="flex justify-between">
                     <span>Comissão:</span>
-                    <strong className="text-slate-900">{v.percentualComissao}%</strong>
+                    <strong className="text-slate-900">{v.comissaoPadraoPct}%</strong>
                   </div>
                   <div className="flex justify-between">
-                    <span>Cadastro:</span>
-                    <strong className="text-slate-900">{v.dataCadastro}</strong>
+                    <span>Loja:</span>
+                    <strong className="text-slate-900">{v.store_id || lojaAtiva?.id}</strong>
+                  </div>
+                  <div className="flex justify-between items-center gap-2">
+                    <span className="flex items-center gap-1"><Calendar className="w-3 h-3" /> Última:</span>
+                    <strong className="text-slate-900">{formatarDataHora(stats.ultima)}</strong>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-2">
                   <div className="bg-blue-50 p-3 rounded-xl border border-blue-200 text-center">
-                    <p className="text-xs text-blue-600 font-semibold">Sinais</p>
-                    <p className="text-lg font-black text-blue-700">{vendedorVendas.length}</p>
+                    <p className="text-xs text-blue-600 font-semibold">Reservas</p>
+                    <p className="text-lg font-black text-blue-700">{stats.qtd}</p>
                   </div>
                   <div className="bg-green-50 p-3 rounded-xl border border-green-200 text-center">
-                    <p className="text-xs text-green-600 font-semibold">Comissões</p>
-                    <p className="text-lg font-black text-green-700">R$ {totalComissoes.toFixed(0)}</p>
+                    <p className="text-xs text-green-600 font-semibold">Reservado</p>
+                    <p className="text-lg font-black text-green-700">{formatarMoeda(stats.total)}</p>
                   </div>
                 </div>
 
                 <div className="flex items-center justify-between pt-3 border-t border-slate-100">
-                  <a
-                    href={`https://wa.me/55${v.telefone.replace(/\D/g, '')}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-xs text-emerald-700 hover:text-emerald-800 font-bold"
-                  >
-                    <Phone className="w-3.5 h-3.5" />
-                    <span>WhatsApp</span>
-                  </a>
+                  {v.telefone ? (
+                    <a
+                      href={`https://wa.me/55${v.telefone.replace(/\D/g, '')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-xs text-emerald-700 hover:text-emerald-800 font-bold"
+                    >
+                      <Phone className="w-3.5 h-3.5" />
+                      <span>WhatsApp</span>
+                    </a>
+                  ) : <span />}
 
                   <div className="flex items-center gap-1">
                     <button
                       onClick={() => abrirModalEditar(v)}
                       className="p-1.5 rounded-lg text-slate-500 hover:text-purple-600 hover:bg-purple-50 transition-colors cursor-pointer"
-                      title="Editar vendedor"
+                      title="Editar vendedor e acesso"
                     >
                       <Edit className="w-4 h-4" />
                     </button>
@@ -384,12 +389,18 @@ export const FrotaVendedoresView: React.FC = () => {
 
       {/* Modal de Cadastro/Edição */}
       {modalAberto && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs">
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200">
-            <h3 className="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs overflow-y-auto">
+          <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 my-8">
+            <h3 className="text-base font-bold text-slate-900 mb-1 flex items-center gap-2">
               <User className="w-5 h-5 text-purple-600" />
               <span>{vendedorEditando ? 'Editar Vendedor' : 'Novo Vendedor'}</span>
             </h3>
+            {lojaAtiva && (
+              <p className="text-[11px] text-slate-500 mb-4 flex items-center gap-1.5">
+                <Store className="w-3.5 h-3.5 text-purple-500" />
+                Vinculado à loja: <strong className="text-slate-700">{lojaAtiva.nome}</strong>
+              </p>
+            )}
 
             <form onSubmit={handleSalvar} className="space-y-4">
               <div>
@@ -397,14 +408,25 @@ export const FrotaVendedoresView: React.FC = () => {
                 <input
                   type="text"
                   required
-                  value={nomeVendedor}
-                  onChange={(e) => setNomeVendedor(e.target.value)}
+                  value={nome}
+                  onChange={(e) => setNome(e.target.value)}
                   placeholder="Ex: João da Silva"
                   className="w-full border border-slate-300 rounded-xl p-2.5 text-xs font-semibold"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">CPF / Documento</label>
+                  <input
+                    type="text"
+                    value={cpfDocumento}
+                    onChange={(e) => setCpfDocumento(e.target.value)}
+                    placeholder="000.000.000-00"
+                    className="w-full border border-slate-300 rounded-xl p-2.5 text-xs font-semibold"
+                  />
+                </div>
+
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">Telefone WhatsApp *</label>
                   <input
@@ -416,21 +438,56 @@ export const FrotaVendedoresView: React.FC = () => {
                     className="w-full border border-slate-300 rounded-xl p-2.5 text-xs font-semibold"
                   />
                 </div>
+              </div>
 
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">Email *</label>
-                  <input
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="email@exemplo.com"
-                    className="w-full border border-slate-300 rounded-xl p-2.5 text-xs font-semibold"
-                  />
+              <div className="border-t border-slate-100 pt-3">
+                <p className="text-[11px] font-black uppercase tracking-wider text-purple-700 flex items-center gap-1.5 mb-3">
+                  <KeyRound className="w-3.5 h-3.5" />
+                  Dados de Acesso ao PDV
+                </p>
+
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">E-mail ou Usuário de Acesso *</label>
+                    <input
+                      type="text"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="email@exemplo.com ou usuario"
+                      autoComplete="off"
+                      className="w-full border border-slate-300 rounded-xl p-2.5 text-xs font-semibold"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
+                      Senha {vendedorEditando ? '(deixe em branco para manter)' : '*'}
+                    </label>
+                    <div className="relative">
+                      <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                      <input
+                        type={mostrarSenha ? 'text' : 'password'}
+                        value={senha}
+                        onChange={(e) => setSenha(e.target.value)}
+                        placeholder={vendedorEditando ? '••••••••' : 'Defina uma senha'}
+                        autoComplete="new-password"
+                        className="w-full border border-slate-300 rounded-xl pl-9 pr-9 py-2.5 text-xs font-semibold"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setMostrarSenha(!mostrarSenha)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
+                        title={mostrarSenha ? 'Ocultar senha' : 'Ver senha'}
+                      >
+                        {mostrarSenha ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-slate-100 pt-3">
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">% Comissão *</label>
                   <div className="flex items-center gap-2">
@@ -440,8 +497,8 @@ export const FrotaVendedoresView: React.FC = () => {
                       max="50"
                       step="0.5"
                       required
-                      value={percentualComissao}
-                      onChange={(e) => setPercentualComissao(parseFloat(e.target.value) || 5)}
+                      value={comissaoPct}
+                      onChange={(e) => setComissaoPct(parseFloat(e.target.value) || 0)}
                       className="w-full border border-slate-300 rounded-xl p-2.5 text-xs font-semibold text-center"
                     />
                     <span className="text-xs font-bold text-slate-500">%</span>
@@ -451,8 +508,8 @@ export const FrotaVendedoresView: React.FC = () => {
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">Status *</label>
                   <select
-                    value={status}
-                    onChange={(e) => setStatus(e.target.value as 'ativo' | 'inativo')}
+                    value={statusAtivo ? 'ativo' : 'inativo'}
+                    onChange={(e) => setStatusAtivo(e.target.value === 'ativo')}
                     className="w-full border border-slate-300 rounded-xl p-2.5 text-xs font-semibold cursor-pointer"
                   >
                     <option value="ativo">Ativo</option>

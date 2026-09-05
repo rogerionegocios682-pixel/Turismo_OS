@@ -19,6 +19,7 @@ import { VoucherPublicoModal } from './components/Voucher/VoucherPublicoModal';
 import { RelatorioPdfModal } from './components/Relatorios/RelatorioPdfModal';
 import { LoginView } from './components/Auth/LoginView';
 import { PainelMasterView } from './components/Master/PainelMasterView';
+import { VendedorPdvLayout } from './components/Vendedor/VendedorPdvLayout';
 import { ArrowLeft, Store } from 'lucide-react';
 
 const AppContent: React.FC = () => {
@@ -41,7 +42,13 @@ const AppContent: React.FC = () => {
     );
   }
 
-  // 2. SE FOR MASTER E NÃO TIVER NENHUMA LOJA SELECIONADA OU ESTIVER NA TAB DO PAINEL MASTER: EXIBE PAINEL MASTER
+  // 2. SE FOR VENDEDOR: ACESSO EXCLUSIVO AO PDV / NOVA RESERVA.
+  // Bloqueia integralmente qualquer área administrativa, independente do activeTab.
+  if (usuarioAutenticado.perfil === 'vendedor') {
+    return <VendedorPdvLayout />;
+  }
+
+  // 3. SE FOR MASTER E NÃO TIVER NENHUMA LOJA SELECIONADA OU ESTIVER NA TAB DO PAINEL MASTER: EXIBE PAINEL MASTER
   if (usuarioAutenticado.perfil === 'master' && (!lojaAtivaId || activeTab === 'painel_master')) {
     return (
       <>

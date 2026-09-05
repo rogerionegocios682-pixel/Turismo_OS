@@ -35,8 +35,16 @@ export const NovaReservaView: React.FC = () => {
     criarReserva, 
     getMareDoDia, 
     abrirVoucherModal,
-    setActiveTab 
+    setActiveTab,
+    usuarioAutenticado
   } = useTurismo();
+
+  // Identifica se quem está emitindo a reserva é um VENDEDOR (perfil restrito ao PDV).
+  // Nesse caso, o vendedor responsável é fixado automaticamente e não pode ser alterado.
+  const ehVendedorLogado = usuarioAutenticado?.perfil === 'vendedor';
+  const vendedorLogado = ehVendedorLogado
+    ? vendedores.find(v => v.id === usuarioAutenticado?.vendedorId)
+    : undefined;
 
   const hojeIso = new Date().toISOString().split('T')[0];
 
@@ -62,7 +70,9 @@ export const NovaReservaView: React.FC = () => {
   const [formaPagtoSinal, setFormaPagtoSinal] = useState<FormaPagamento>('pix');
   
   const [motoristaId, setMotoristaId] = useState('');
-  const [vendedorId, setVendedorId] = useState(vendedores[0]?.id || '');
+  const [vendedorId, setVendedorId] = useState(
+    ehVendedorLogado ? (vendedorLogado?.id || usuarioAutenticado?.vendedorId || '') : (vendedores[0]?.id || '')
+  );
   const [observacoesVoucher, setObservacoesVoucher] = useState('');
 
   // Sugestões de hotéis filtradas
@@ -128,6 +138,16 @@ export const NovaReservaView: React.FC = () => {
     const calc = Math.round((valorTotalGeral * (percentualSinal / 100)) * 100) / 100;
     setSinalManual(calc);
   }, [valorTotalGeral, percentualSinal]);
+
+  // Trava o vendedor responsável quando quem emite é o próprio vendedor logado
+  useEffect(() => {
+    if (ehVendedorLogado) {
+      const idFixo = vendedorLogado?.id || usuarioAutenticado?.vendedorId || '';
+      if (idFixo && vendedorId !== idFixo) {
+        setVendedorId(idFixo);
+      }
+    }
+  }, [ehVendedorLogado, vendedorLogado?.id, usuarioAutenticado?.vendedorId, vendedorId]);
 
   const valorSaldoRestante = Math.max(0, valorTotalGeral - sinalManual);
 
@@ -591,17 +611,29 @@ export const NovaReservaView: React.FC = () => {
               <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">
                 Vendedor / Promotor (Comissão)
               </label>
-              <select
-                value={vendedorId}
-                onChange={(e) => setVendedorId(e.target.value)}
-                className="w-full border border-slate-300 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
-              >
-                {vendedores.map(v => (
-                  <option key={v.id} value={v.id}>
-                    {v.nome} ({v.comissaoPadraoPct}% comissão - {formatarMoeda(valorTotalGeral * (v.comissaoPadraoPct / 100))})
-                  </option>
-                ))}
-              </select>
+              {ehVendedorLogado ? (
+                <div className="w-full border border-blue-200 bg-blue-50 rounded-xl p-3 text-sm font-semibold text-blue-900 flex items-center justify-between gap-2">
+                  <span className="truncate">
+                    {vendedorLogado?.nome || usuarioAutenticado?.nome}
+                    {vendedorAtual ? ` (${vendedorAtual.comissaoPadraoPct}%)` : ''}
+                  </span>
+                  <span className="text-[10px] uppercase font-bold bg-blue-600 text-white px-2 py-0.5 rounded-md shrink-0">
+                    Você
+                  </span>
+                </div>
+              ) : (
+                <select
+                  value={vendedorId}
+                  onChange={(e) => setVendedorId(e.target.value)}
+                  className="w-full border border-slate-300 rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                >
+                  {vendedores.map(v => (
+                    <option key={v.id} value={v.id}>
+                      {v.nome} ({v.comissaoPadraoPct}% comissão - {formatarMoeda(valorTotalGeral * (v.comissaoPadraoPct / 100))})
+                    </option>
+                  ))}
+                </select>
+              )}
             </div>
           </div>
         </div>

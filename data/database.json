@@ -1,0 +1,1100 @@
+{
+  "lojas": [
+    {
+      "id": "LOJA_001",
+      "nome": "Porto Exclusive Receptivo & Tours",
+      "razaoSocial": "Porto de Galinhas Turismo e Serviços Receptivos EIRELI",
+      "cnpj": "34.567.890/0001-12",
+      "cidade": "Porto de Galinhas - Ipojuca / PE",
+      "telefone": "(81) 99876-5432",
+      "email": "reservas@portoexclusive.com.br",
+      "status": "ativa",
+      "criadoEm": "2025-01-10T08:00:00.000Z",
+      "empresaConfig": {
+        "nomeFantasia": "Porto Exclusive Receptivo & Tours",
+        "razaoSocial": "Porto de Galinhas Turismo e Serviços Receptivos EIRELI",
+        "cnpj": "34.567.890/0001-12",
+        "cadastur": "16.034567.10.0001-4",
+        "telefoneWhatsapp": "(81) 99876-5432",
+        "emailContato": "reservas@portoexclusive.com.br",
+        "enderecoCompleto": "Rua Beijupirá, 120 - Galeria das Piscinas, Loja 04 - Centro, Porto de Galinhas, Ipojuca - PE",
+        "cidadeBase": "Porto de Galinhas - Ipojuca / PE",
+        "chavePixTipo": "cnpj",
+        "chavePix": "34.567.890/0001-12",
+        "nomeTitularPix": "Porto Exclusive Receptivo",
+        "logoBase64": "",
+        "percentualSinalPadrao": 30,
+        "politicaCancelamento": "Cancelamentos com antecedência superior a 24h garantem 100% de remarcação ou devolução de 80% do sinal. Cancelamentos com menos de 24h ou no-show no ponto de embarque implicam na perda integral do sinal pago para cobrir custos de reserva de vaga.",
+        "termosVoucher": "1. Apresente este voucher impresso ou na tela do smartphone ao guia/motorista credenciado.\n2. O saldo restante deve ser quitado no momento do embarque via PIX, Cartão ou Dinheiro.\n3. Horário de embarque sujeito a tolerância de até 15 minutos em virtude do trânsito na rota dos resorts.\n4. Para passeios de piscinas naturais, os horários de saída são estritamente regulados pela Marinha do Brasil e Tábua de Marés.",
+        "agencias": [
+          "Matriz - Centro de Porto de Galinhas",
+          "Balcão - Vila de Porto (Rua Esperança)",
+          "Ponto de Apoio - Muro Alto Resorts",
+          "Filial - Maragogi AL (Orla)",
+          "Parceiro - Praia dos Carneiros (Bora Bora)"
+        ],
+        "store_id": "LOJA_001"
+      }
+    },
+    {
+      "id": "LOJA_002",
+      "nome": "Maragogi Prime Receptivo & Catamarãs",
+      "razaoSocial": "Maragogi Prime Turismo e Navegação Ltda",
+      "cnpj": "45.123.789/0001-55",
+      "cidade": "Maragogi - AL",
+      "telefone": "(82) 99123-4567",
+      "email": "contato@maragogiprime.com.br",
+      "status": "ativa",
+      "criadoEm": "2025-02-15T09:30:00.000Z",
+      "empresaConfig": {
+        "store_id": "LOJA_002",
+        "nomeFantasia": "Maragogi Prime Receptivo & Catamarãs",
+        "razaoSocial": "Maragogi Prime Turismo e Navegação Ltda",
+        "cnpj": "45.123.789/0001-55",
+        "cadastur": "17.045123.10.0002-8",
+        "telefoneWhatsapp": "(82) 99123-4567",
+        "emailContato": "reservas@maragogiprime.com.br",
+        "enderecoCompleto": "Av. Senador Rui Palmeira, 450 - Orla Central, Maragogi - AL",
+        "cidadeBase": "Maragogi - AL",
+        "chavePixTipo": "cnpj",
+        "chavePix": "45.123.789/0001-55",
+        "nomeTitularPix": "Maragogi Prime Turismo Ltda",
+        "logoBase64": "",
+        "percentualSinalPadrao": 30,
+        "politicaCancelamento": "Cancelamentos até 24h antes com devolução integral do sinal. No-show com perda do sinal.",
+        "termosVoucher": "Apresente este voucher no embarque do catamarã na Praia de Maragogi. Sujeito às condições da tábua de marés.",
+        "agencias": [
+          "Base Orla Central - Maragogi",
+          "Ponto Antunes VIP",
+          "Receptivo Barra Grande"
+        ]
+      }
+    },
+    {
+      "id": "LOJA_003",
+      "nome": "Carneiros Beach Tours & Receptivo",
+      "razaoSocial": "Carneiros Turismo e Lazer EIRELI",
+      "cnpj": "28.987.654/0001-33",
+      "cidade": "Tamandaré / Praia dos Carneiros - PE",
+      "telefone": "(81) 98888-2233",
+      "email": "atendimento@carneirostours.com.br",
+      "status": "ativa",
+      "criadoEm": "2025-03-01T10:00:00.000Z",
+      "empresaConfig": {
+        "store_id": "LOJA_003",
+        "nomeFantasia": "Carneiros Beach Tours & Receptivo",
+        "razaoSocial": "Carneiros Turismo e Lazer EIRELI",
+        "cnpj": "28.987.654/0001-33",
+        "cadastur": "16.028987.10.0003-1",
+        "telefoneWhatsapp": "(81) 98888-2233",
+        "emailContato": "contato@carneirostours.com.br",
+        "enderecoCompleto": "Praia dos Carneiros, Acesso Bora Bora - Tamandaré - PE",
+        "cidadeBase": "Praia dos Carneiros - Tamandaré / PE",
+        "chavePixTipo": "cnpj",
+        "chavePix": "28.987.654/0001-33",
+        "nomeTitularPix": "Carneiros Beach Tours",
+        "logoBase64": "",
+        "percentualSinalPadrao": 30,
+        "politicaCancelamento": "Remarcações gratuitas com até 12h de antecedência.",
+        "termosVoucher": "Voucher válido para day-use e passeios náuticos em Carneiros.",
+        "agencias": [
+          "Receptivo Praia dos Carneiros",
+          "Balcão Tamandaré Centro"
+        ]
+      }
+    },
+    {
+      "id": "LOJA_004",
+      "nome": "Ilha de Santo Aleixo Aventura (Inativa)",
+      "razaoSocial": "Santo Aleixo Náutica & Ecoturismo Ltda",
+      "cnpj": "19.333.222/0001-99",
+      "cidade": "Sirinhaém - PE",
+      "telefone": "(81) 97777-1122",
+      "email": "contato@santoaleixo.com.br",
+      "status": "inativa",
+      "criadoEm": "2025-04-12T14:00:00.000Z",
+      "empresaConfig": {
+        "store_id": "LOJA_004",
+        "nomeFantasia": "Ilha de Santo Aleixo Aventura",
+        "razaoSocial": "Santo Aleixo Náutica & Ecoturismo Ltda",
+        "cnpj": "19.333.222/0001-99",
+        "cadastur": "16.019333.10.0004-9",
+        "telefoneWhatsapp": "(81) 97777-1122",
+        "emailContato": "contato@santoaleixo.com.br",
+        "enderecoCompleto": "Marina Barra de Sirinhaém - Sirinhaém - PE",
+        "cidadeBase": "Sirinhaém - PE",
+        "chavePixTipo": "cnpj",
+        "chavePix": "19.333.222/0001-99",
+        "nomeTitularPix": "Santo Aleixo Náutica",
+        "logoBase64": "",
+        "percentualSinalPadrao": 30,
+        "politicaCancelamento": "Cancelamento em até 24h.",
+        "termosVoucher": "Apresentar na marina de embarque.",
+        "agencias": [
+          "Marina Sirinhaém"
+        ]
+      }
+    }
+  ],
+  "usuarios": [
+    {
+      "id": "USR-MASTER-01",
+      "nome": "Administrador Master",
+      "email": "rogerionegocios682@gmail.com",
+      "usuarioLogin": "master",
+      "senha": "@eRro404",
+      "perfil": "master",
+      "store_id": "ALL",
+      "nomeLoja": "PAINEL MASTER (Todas as Lojas)",
+      "status": "ativo",
+      "ultimoAcesso": "2026-09-05T05:05:37.970Z"
+    },
+    {
+      "senha": "123",
+      "usuarioLogin": "porto",
+      "email": "rogerio@portoexclusive.com.br",
+      "nomeLoja": "Porto Exclusive Receptivo & Tours",
+      "ultimoAcesso": "2026-08-24T17:24:34.967Z",
+      "id": "USR-LOJA1-01",
+      "nome": "Rogério Silva",
+      "perfil": "admin_loja",
+      "store_id": "LOJA_001",
+      "status": "inativo"
+    },
+    {
+      "ultimoAcesso": "2026-08-24T17:24:34.967Z",
+      "nome": "Juliana Costa",
+      "perfil": "admin_loja",
+      "status": "inativo",
+      "usuarioLogin": "maragogi",
+      "email": "juliana@maragogiprime.com.br",
+      "store_id": "LOJA_002",
+      "nomeLoja": "Maragogi Prime Receptivo & Catamarãs",
+      "id": "USR-LOJA2-01",
+      "senha": "123"
+    },
+    {
+      "nomeLoja": "Carneiros Beach Tours & Receptivo",
+      "store_id": "LOJA_003",
+      "usuarioLogin": "carneiros",
+      "id": "USR-LOJA3-01",
+      "senha": "123",
+      "perfil": "admin_loja",
+      "status": "inativo",
+      "nome": "Carlos Eduardo",
+      "ultimoAcesso": "2026-08-24T17:24:34.967Z",
+      "email": "carlos@carneirostours.com.br"
+    },
+    {
+      "nome": "Porto Passeios",
+      "usuarioLogin": "portocomjosetour",
+      "email": "portocomjosetour@gmail.com",
+      "status": "ativo",
+      "perfil": "admin_loja",
+      "nomeLoja": "Porto Passeios",
+      "id": "USR-8970",
+      "ultimoAcesso": "2026-08-28T10:07:28.970Z",
+      "store_id": "LOJA_8970",
+      "senha": "Mudar@123"
+    },
+    {
+      "id": "USR-VEN-35721",
+      "nome": "Carlos Vendedor Teste",
+      "email": "carlos.teste",
+      "usuarioLogin": "carlos.teste",
+      "senha": "senha123",
+      "perfil": "vendedor",
+      "store_id": "LOJA_8970",
+      "nomeLoja": "Porto Passeios",
+      "status": "ativo",
+      "ultimoAcesso": "2026-09-05T05:05:35.721Z",
+      "vendedorId": "VEN-35721",
+      "comissaoPct": 5
+    }
+  ],
+  "passeios": [
+    {
+      "id": "PAS-01",
+      "nome": "Passeio de Buggy Ponta a Ponta (Muro Alto até Pontal de Maracaípe)",
+      "categoria": "buggy",
+      "precoPadrao": 420,
+      "tipoCobranca": "veiculo_privativo",
+      "capacidadeMax": 4,
+      "duracaoHoras": 6,
+      "destinoPrincipal": "Porto de Galinhas / Ipojuca",
+      "dependeMare": true,
+      "horarioRecomendado": "08:30 às 14:30 (Ajustável à maré)",
+      "descricaoCurta": "O clássico imperdível de Porto! Paradas no Muro Alto (stand up/caiaque), Praia do Cupe (ondas/piscinas), Coqueiral de Maracaípe e pôr do sol no Pontal com passeio ecológico de jangada para ver cavalos-marinhos.",
+      "incluso": [
+        "Buggy exclusivo com motorista credenciado pela prefeitura",
+        "Combustível",
+        "Embarque e desembarque no hotel"
+      ],
+      "opcionais": [
+        {
+          "id": "op-jangada",
+          "nome": "Passeio de Jangada no Pontal (Cavalos-marinhos)",
+          "preco": 40,
+          "unidade": "por_pessoa"
+        },
+        {
+          "id": "op-fotos-drone",
+          "nome": "Ensaio Fotográfico com Drone no Coqueiral",
+          "preco": 120,
+          "unidade": "por_servico"
+        }
+      ],
+      "ativo": true,
+      "store_id": "LOJA_001"
+    },
+    {
+      "id": "PAS-02",
+      "nome": "Catamarã Piscinas Naturais de Maragogi (Galés & Orla)",
+      "categoria": "catamara",
+      "precoPadrao": 170,
+      "tipoCobranca": "por_pessoa",
+      "duracaoHoras": 9,
+      "destinoPrincipal": "Maragogi - Alagoas",
+      "dependeMare": true,
+      "horarioRecomendado": "Saída entre 06:00 e 07:30 conforme a maré",
+      "descricaoCurta": "Passeio de dia inteiro ao Caribe Brasileiro em Alagoas. Inclui transfer ida e volta em van executiva climatizada com guia + navegação em catamarã até as famosas Galés de Maragogi.",
+      "incluso": [
+        "Transfer climatizado ida/volta com guia",
+        "Ingresso do Catamarã",
+        "Ponto de apoio com infraestrutura de praia e restaurante"
+      ],
+      "opcionais": [
+        {
+          "id": "op-mergulho-batismo",
+          "nome": "Mergulho de Batismo com Cilindro + Fotos",
+          "preco": 180,
+          "unidade": "por_pessoa"
+        },
+        {
+          "id": "op-mascara-snorkel",
+          "nome": "Aluguel Máscara Snorkel Premium",
+          "preco": 25,
+          "unidade": "por_pessoa"
+        },
+        {
+          "id": "op-buggy-maragogi",
+          "nome": "Passeio de Buggy pelas Praias de Maragogi (Antunes/Burgalhau)",
+          "preco": 300,
+          "unidade": "por_veiculo"
+        }
+      ],
+      "ativo": true,
+      "store_id": "LOJA_001"
+    },
+    {
+      "id": "PAS-03",
+      "nome": "Praia dos Carneiros com Passeio de Catamarã & Ponto de Apoio",
+      "categoria": "catamara",
+      "precoPadrao": 140,
+      "tipoCobranca": "por_pessoa",
+      "duracaoHoras": 8,
+      "destinoPrincipal": "Praia dos Carneiros - Tamandaré",
+      "dependeMare": false,
+      "horarioRecomendado": "Saída às 08:30 / Retorno às 16:30",
+      "descricaoCurta": "Uma das praias mais paradisíacas do Brasil. Dia de lazer com base no receptivo Bora Bora ou Mustako, com passeio de catamarã incluso passando pela Igrejinha de São Benedito, Bancos de Areia e Banho de Argila rejuvenescedor.",
+      "incluso": [
+        "Transporte Van Executiva climatizada",
+        "Guia de Turismo Mtur",
+        "Passeio de Catamarã de 2 horas",
+        "Day-use no receptivo"
+      ],
+      "opcionais": [
+        {
+          "id": "op-lancha-carneiros",
+          "nome": "Upgrade para Lancha Rápida VIP (Privativa)",
+          "preco": 450,
+          "unidade": "por_servico"
+        },
+        {
+          "id": "op-standup",
+          "nome": "Aluguel Stand Up Paddle (1h)",
+          "preco": 50,
+          "unidade": "por_pessoa"
+        }
+      ],
+      "ativo": true,
+      "store_id": "LOJA_001"
+    },
+    {
+      "id": "PAS-04",
+      "nome": "Ilha de Santo Aleixo (O Paraíso Secreto do Litoral Sul)",
+      "categoria": "lancha_privativa",
+      "precoPadrao": 160,
+      "tipoCobranca": "por_pessoa",
+      "duracaoHoras": 7,
+      "destinoPrincipal": "Sirinhaém / Ilha de Santo Aleixo",
+      "dependeMare": false,
+      "horarioRecomendado": "Saída às 08:30 / Retorno às 15:30",
+      "descricaoCurta": "Travessia em lancha rápida até a exclusiva ilha vulcânica de águas cristalinas em formato de ferradura. Inclui trilha ecológica guiada até a Praia da Ferradura com piscinas mornas e calmas.",
+      "incluso": [
+        "Transfer van ida e volta",
+        "Travessia de Lancha Rápida",
+        "Guia ecológico credenciado",
+        "Cadeiras e guarda-sol na praia"
+      ],
+      "opcionais": [
+        {
+          "id": "op-caiaque",
+          "nome": "Aluguel Caiaque Duplo (40 min)",
+          "preco": 40,
+          "unidade": "por_pessoa"
+        }
+      ],
+      "ativo": true,
+      "store_id": "LOJA_001"
+    },
+    {
+      "id": "PAS-05",
+      "nome": "Passeio Ecológico Calhetas & Cabo de Santo Agostinho (4x4 ou Van)",
+      "categoria": "4x4_offroad",
+      "precoPadrao": 130,
+      "tipoCobranca": "por_pessoa",
+      "duracaoHoras": 7,
+      "destinoPrincipal": "Cabo de Santo Agostinho",
+      "dependeMare": false,
+      "horarioRecomendado": "Saída às 08:30 / Retorno às 16:00",
+      "descricaoCurta": "Roteiro histórico e de aventura pelas praias de Calhetas, Gaibu, Pedra do Xaréu, mirante da Tirolesa de Calhetas, ruínas do Forte Castelo do Mar e banho de argila medicinal.",
+      "incluso": [
+        "Transporte 4x4 ou Van Executiva",
+        "Guia regional",
+        "Parada no Mirante da Tirolesa"
+      ],
+      "opcionais": [
+        {
+          "id": "op-tirolesa",
+          "nome": "Ingresso Tirolesa de Calhetas",
+          "preco": 35,
+          "unidade": "por_pessoa"
+        }
+      ],
+      "ativo": true,
+      "store_id": "LOJA_001"
+    },
+    {
+      "id": "PAS-06",
+      "nome": "Transfer Executivo Aeroporto Recife (REC) ⇄ Porto de Galinhas",
+      "categoria": "transfer_aeroporto",
+      "precoPadrao": 220,
+      "tipoCobranca": "veiculo_privativo",
+      "capacidadeMax": 4,
+      "duracaoHoras": 1.5,
+      "destinoPrincipal": "Recife / Porto de Galinhas",
+      "dependeMare": false,
+      "horarioRecomendado": "Conforme voo do passageiro",
+      "descricaoCurta": "Recepção personalizada no desembarque do Aeroporto Internacional dos Guararapes (REC) com placa nominal e transporte privativo com ar-condicionado direto ao resort/hotel em Porto de Galinhas.",
+      "incluso": [
+        "Veículo Sedan/Spin Executivo com ar",
+        "Pedágio da Rota do Atlântico",
+        "Água mineral gelada a bordo",
+        "Rastreamento do voo em tempo real"
+      ],
+      "opcionais": [
+        {
+          "id": "op-cadeirinha",
+          "nome": "Cadeirinha de Bebê / Assento de Elevação",
+          "preco": 0,
+          "unidade": "por_servico"
+        }
+      ],
+      "ativo": true,
+      "store_id": "LOJA_001"
+    },
+    {
+      "id": "PAS-M01",
+      "store_id": "LOJA_002",
+      "nome": "Catamarã Piscinas Naturais de Maragogi (Galés Principais)",
+      "categoria": "catamara",
+      "precoPadrao": 180,
+      "tipoCobranca": "por_pessoa",
+      "duracaoHoras": 3,
+      "destinoPrincipal": "Galés de Maragogi",
+      "dependeMare": true,
+      "horarioRecomendado": "Horário conforme a maré baixa",
+      "descricaoCurta": "Passeio náutico oficial de catamarã até as maiores piscinas naturais do Brasil.",
+      "incluso": [
+        "Ingresso catamarã",
+        "Máscara de mergulho simples",
+        "Guia a bordo"
+      ],
+      "opcionais": [
+        {
+          "id": "op-m1",
+          "nome": "Mergulho Batismo com Cilindro",
+          "preco": 190,
+          "unidade": "por_pessoa"
+        },
+        {
+          "id": "op-m2",
+          "nome": "Fotos Subaquáticas",
+          "preco": 80,
+          "unidade": "por_servico"
+        }
+      ],
+      "ativo": true
+    },
+    {
+      "id": "PAS-M02",
+      "store_id": "LOJA_002",
+      "nome": "Buggy Praias do Norte (Antunes, Barra Grande e Ponta de Mangue)",
+      "categoria": "buggy",
+      "precoPadrao": 350,
+      "tipoCobranca": "veiculo_privativo",
+      "capacidadeMax": 4,
+      "duracaoHoras": 4,
+      "destinoPrincipal": "Litoral Norte de Maragogi",
+      "dependeMare": false,
+      "horarioRecomendado": "09:00 às 13:00",
+      "descricaoCurta": "Passeio pelas praias mais paradisíacas com parada no famoso Caminho de Moisés.",
+      "incluso": [
+        "Buggy privativo",
+        "Motorista credenciado",
+        "Combustível"
+      ],
+      "ativo": true
+    }
+  ],
+  "motoristas": [
+    {
+      "id": "MOT-01",
+      "nomeMotorista": "José 'Zito' Bugueiro",
+      "telefone": "(81) 98711-2233",
+      "veiculoModelo": "Buggy Selvagem 1.6",
+      "tipoVeiculo": "buggy",
+      "placaOuRegistro": "BUG-8821 (Prefeitura #042)",
+      "capacidadePax": 4,
+      "status": "disponivel",
+      "observacoes": "Especialista em fotos no coqueiral e dunas de Maracaípe.",
+      "store_id": "LOJA_001"
+    },
+    {
+      "id": "MOT-02",
+      "nomeMotorista": "Cláudio Santos (Receptivo)",
+      "telefone": "(81) 99122-4455",
+      "veiculoModelo": "Mercedes Sprinter 415 Executiva",
+      "tipoVeiculo": "van",
+      "placaOuRegistro": "PGT-4E19 (Cadastur)",
+      "capacidadePax": 15,
+      "status": "disponivel",
+      "observacoes": "Rota diária de Maragogi e Carneiros. Ar-condicionado reforçado e Wi-Fi.",
+      "store_id": "LOJA_001"
+    },
+    {
+      "id": "MOT-03",
+      "nomeMotorista": "Marcos Vinícius",
+      "telefone": "(81) 99633-7788",
+      "veiculoModelo": "Chevrolet Spin 7 Lugares",
+      "tipoVeiculo": "spin_executivo",
+      "placaOuRegistro": "RCE-9A44",
+      "capacidadePax": 6,
+      "status": "disponivel",
+      "observacoes": "Transfers executivos para Aeroporto do Recife e hotéis de Muro Alto.",
+      "store_id": "LOJA_001"
+    },
+    {
+      "id": "MOT-04",
+      "nomeMotorista": "Capitão Beto",
+      "telefone": "(81) 98455-9900",
+      "veiculoModelo": "Lancha Coral 26 pés (VIP)",
+      "tipoVeiculo": "lancha",
+      "placaOuRegistro": "MAR-0918-PE",
+      "capacidadePax": 10,
+      "status": "disponivel",
+      "observacoes": "Embarcação para Carneiros e Ilha de Santo Aleixo com som bluetooth e cooler.",
+      "store_id": "LOJA_001"
+    },
+    {
+      "id": "MOT-M01",
+      "store_id": "LOJA_002",
+      "nomeMotorista": "Sebastião Silva (Tião Maragogi)",
+      "telefone": "(82) 99881-3344",
+      "veiculoModelo": "Buggy Selvagem 1.8",
+      "tipoVeiculo": "buggy",
+      "placaOuRegistro": "MGO-2025",
+      "capacidadePax": 4,
+      "status": "disponivel",
+      "observacoes": "Credenciado Prefeitura de Maragogi"
+    },
+    {
+      "id": "MOT-M02",
+      "store_id": "LOJA_002",
+      "nomeMotorista": "Comandante Jorge Alagoas",
+      "telefone": "(82) 99772-5566",
+      "veiculoModelo": "Catamarã Maragogi I (60 Pax)",
+      "tipoVeiculo": "catamara",
+      "placaOuRegistro": "CAP-MGO-019",
+      "capacidadePax": 60,
+      "status": "disponivel",
+      "observacoes": "Marinheiro habilitado pela Capitania dos Portos"
+    }
+  ],
+  "vendedores": [
+    {
+      "telefone": "(81) 99876-5432",
+      "id": "VEN-01",
+      "tipo": "balcao_loja",
+      "store_id": "LOJA_001",
+      "nome": "Balcão Loja Matriz",
+      "comissaoPadraoPct": 0,
+      "ativo": true
+    },
+    {
+      "chavePix": "rogerio@gmail.com",
+      "store_id": "LOJA_001",
+      "tipo": "balcao_loja",
+      "comissaoPadraoPct": 8,
+      "ativo": true,
+      "telefone": "(81) 98661-1122",
+      "id": "VEN-02",
+      "nome": "Rogério Silva (Consultor Balcão)"
+    },
+    {
+      "ativo": true,
+      "nome": "Camila Pousadas (Concierge Cupe)",
+      "telefone": "(81) 99344-5566",
+      "tipo": "parceiro_hotel",
+      "comissaoPadraoPct": 10,
+      "id": "VEN-03",
+      "chavePix": "81993445566",
+      "store_id": "LOJA_001"
+    },
+    {
+      "telefone": "(81) 98555-4433",
+      "tipo": "promotor_rua",
+      "id": "VEN-04",
+      "chavePix": "manoelneto.pix@banco.com",
+      "store_id": "LOJA_001",
+      "comissaoPadraoPct": 12,
+      "nome": "Manoel 'Neto' (Promotor Orla)",
+      "ativo": true
+    },
+    {
+      "comissaoPadraoPct": 10,
+      "chavePix": "aline.maragogi@pix.com",
+      "store_id": "LOJA_002",
+      "tipo": "balcao_loja",
+      "id": "VEN-M01",
+      "ativo": true,
+      "telefone": "(82) 99333-1122",
+      "nome": "Aline Mendonça (Balcão Orla)"
+    },
+    {
+      "id": "VEN-35721",
+      "store_id": "LOJA_8970",
+      "nome": "Carlos Vendedor Teste",
+      "tipo": "balcao_loja",
+      "comissaoPadraoPct": 5,
+      "telefone": "(81) 98888-7777",
+      "ativo": true,
+      "cpfDocumento": "123.456.789-00",
+      "email": "carlos.teste",
+      "usuarioLogin": "carlos.teste",
+      "temAcesso": true
+    }
+  ],
+  "reservas": [
+    {
+      "id": "RSV-849201",
+      "codigoVoucher": "RSV-849201",
+      "agenciaEmissora": "Matriz - Centro de Porto de Galinhas",
+      "dataEmissao": "2026-09-04T23:54:57.409Z",
+      "dataPasseio": "2026-08-22",
+      "horarioEmbarquePrevisto": "07:30",
+      "clienteNome": "Dr. Eduardo Meirelles",
+      "clienteTelefone": "(11) 98455-1234",
+      "clienteCpfPassaporte": "123.456.789-00",
+      "clienteHotel": "Nannai Muro Alto Resort",
+      "clienteQuarto": "Bangalô 14",
+      "passeioId": "PAS-02",
+      "passeioNome": "Catamarã Piscinas Naturais de Maragogi (Galés & Orla)",
+      "paxAdultos": 2,
+      "paxCriancas": 1,
+      "paxBebes": 0,
+      "totalPax": 3,
+      "opcionaisSelecionados": [
+        {
+          "nome": "Mergulho de Batismo com Cilindro + Fotos",
+          "quantidade": 2,
+          "valorTotal": 360
+        }
+      ],
+      "valorUnitarioOuBase": 170,
+      "valorOpcionais": 360,
+      "valorDesconto": 0,
+      "valorTotal": 870,
+      "valorSinalPago": 300,
+      "formaPagamentoSinal": "pix",
+      "valorSaldoRestante": 570,
+      "saldoQuitado": false,
+      "motoristaVeiculoId": "MOT-02",
+      "motoristaNome": "Cláudio Santos (Receptivo)",
+      "motoristaTelefone": "(81) 99122-4455",
+      "veiculoInfo": "Van Sprinter (PGT-4E19)",
+      "ordemParada": 1,
+      "statusEmbarque": "aguardando",
+      "vendedorId": "VEN-02",
+      "vendedorNome": "Rogério Silva (Consultor Balcão)",
+      "comissaoValor": 69.6,
+      "comissaoPaga": false,
+      "observacoesInternas": "Cliente VIP, solicita assentos na frente da van para a criança.",
+      "observacoesVoucher": "Levar toalha de banho, protetor solar e calçado aquático.",
+      "status": "confirmada",
+      "store_id": "LOJA_001"
+    },
+    {
+      "id": "RSV-849202",
+      "codigoVoucher": "RSV-849202",
+      "agenciaEmissora": "Matriz - Centro de Porto de Galinhas",
+      "dataEmissao": "2026-09-04T20:54:57.411Z",
+      "dataPasseio": "2026-08-22",
+      "horarioEmbarquePrevisto": "08:15",
+      "clienteNome": "Juliana Vasconcelos & Família",
+      "clienteTelefone": "(31) 99188-7744",
+      "clienteCpfPassaporte": "987.654.321-11",
+      "clienteHotel": "Summerville Beach Resort",
+      "clienteQuarto": "Apto 204",
+      "passeioId": "PAS-01",
+      "passeioNome": "Passeio de Buggy Ponta a Ponta (Muro Alto até Pontal de Maracaípe)",
+      "paxAdultos": 4,
+      "paxCriancas": 0,
+      "paxBebes": 0,
+      "totalPax": 4,
+      "opcionaisSelecionados": [
+        {
+          "nome": "Passeio de Jangada no Pontal (Cavalos-marinhos)",
+          "quantidade": 4,
+          "valorTotal": 160
+        }
+      ],
+      "valorUnitarioOuBase": 420,
+      "valorOpcionais": 160,
+      "valorDesconto": 0,
+      "valorTotal": 580,
+      "valorSinalPago": 200,
+      "formaPagamentoSinal": "cartao_credito",
+      "valorSaldoRestante": 380,
+      "saldoQuitado": false,
+      "motoristaVeiculoId": "MOT-01",
+      "motoristaNome": "José 'Zito' Bugueiro",
+      "motoristaTelefone": "(81) 98711-2233",
+      "veiculoInfo": "Buggy Selvagem (#042)",
+      "ordemParada": 2,
+      "statusEmbarque": "aguardando",
+      "vendedorId": "VEN-03",
+      "vendedorNome": "Camila Pousadas (Concierge Cupe)",
+      "comissaoValor": 58,
+      "comissaoPaga": false,
+      "observacoesInternas": "Casal comemorando aniversário de casamento.",
+      "observacoesVoucher": "Parada para almoço no Bar da Praia em Muro Alto.",
+      "status": "confirmada",
+      "store_id": "LOJA_001"
+    },
+    {
+      "id": "RSV-849203",
+      "codigoVoucher": "RSV-849203",
+      "agenciaEmissora": "Balcão - Vila de Porto (Rua Esperança)",
+      "dataEmissao": "2026-09-04T08:54:57.411Z",
+      "dataPasseio": "2026-08-21",
+      "horarioEmbarquePrevisto": "08:30",
+      "clienteNome": "Rodrigo Mendonça",
+      "clienteTelefone": "(21) 97655-4321",
+      "clienteHotel": "Hotel Solar Porto de Galinhas",
+      "passeioId": "PAS-03",
+      "passeioNome": "Praia dos Carneiros com Passeio de Catamarã & Ponto de Apoio",
+      "paxAdultos": 2,
+      "paxCriancas": 0,
+      "paxBebes": 0,
+      "totalPax": 2,
+      "valorUnitarioOuBase": 140,
+      "valorOpcionais": 0,
+      "valorDesconto": 0,
+      "valorTotal": 280,
+      "valorSinalPago": 100,
+      "formaPagamentoSinal": "pix",
+      "valorSaldoRestante": 0,
+      "formaPagamentoSaldo": "pix",
+      "saldoQuitado": true,
+      "dataQuitacaoSaldo": "2026-09-05T04:54:57.411Z",
+      "motoristaVeiculoId": "MOT-02",
+      "motoristaNome": "Cláudio Santos (Receptivo)",
+      "motoristaTelefone": "(81) 99122-4455",
+      "veiculoInfo": "Van Sprinter (PGT-4E19)",
+      "ordemParada": 1,
+      "statusEmbarque": "embarcado_saldo_pago",
+      "horaEmbarqueEfetivo": "08:32",
+      "vendedorId": "VEN-02",
+      "vendedorNome": "Rogério Silva (Consultor Balcão)",
+      "comissaoValor": 22.4,
+      "comissaoPaga": true,
+      "observacoesInternas": "Embarque realizado com sucesso, saldo recebido via PIX direto com o guia.",
+      "status": "embarcado",
+      "store_id": "LOJA_001"
+    },
+    {
+      "id": "RSV-M70010",
+      "store_id": "LOJA_002",
+      "codigoVoucher": "RSV-M70010",
+      "agenciaEmissora": "Base Orla Central - Maragogi",
+      "dataEmissao": "2026-09-05T04:54:57.411Z",
+      "dataPasseio": "2026-09-05",
+      "horarioEmbarquePrevisto": "09:00",
+      "clienteNome": "Mariana Fontes",
+      "clienteTelefone": "(11) 98765-4321",
+      "clienteHotel": "Salinas Maragogi Resort",
+      "clienteQuarto": "304",
+      "passeioId": "PAS-M01",
+      "passeioNome": "Catamarã Piscinas Naturais de Maragogi (Galés Principais)",
+      "paxAdultos": 2,
+      "paxCriancas": 1,
+      "paxBebes": 0,
+      "totalPax": 3,
+      "valorUnitarioOuBase": 180,
+      "valorOpcionais": 0,
+      "valorDesconto": 0,
+      "valorTotal": 540,
+      "valorSinalPago": 162,
+      "formaPagamentoSinal": "pix",
+      "valorSaldoRestante": 378,
+      "saldoQuitado": false,
+      "motoristaVeiculoId": "MOT-M02",
+      "motoristaNome": "Comandante Jorge Alagoas",
+      "veiculoInfo": "Catamarã Maragogi I (60 Pax)",
+      "statusEmbarque": "aguardando",
+      "vendedorId": "VEN-M01",
+      "vendedorNome": "Aline Mendonça (Balcão Orla)",
+      "comissaoValor": 54,
+      "comissaoPaga": false,
+      "status": "confirmada"
+    }
+  ],
+  "transacoes": [
+    {
+      "id": "TX-01",
+      "store_id": "LOJA_001",
+      "dataHora": "2026-09-04T23:54:57.412Z",
+      "tipo": "entrada_sinal",
+      "reservaId": "RSV-849201",
+      "codigoVoucher": "RSV-849201",
+      "agencia": "Matriz - Centro de Porto de Galinhas",
+      "valor": 300,
+      "formaPagamento": "pix",
+      "descricao": "Sinal recebido - Reserva RSV-849201 (Dr. Eduardo Meirelles)",
+      "operadorNome": "Rogério Silva"
+    },
+    {
+      "id": "TX-02",
+      "store_id": "LOJA_001",
+      "dataHora": "2026-09-04T20:54:57.412Z",
+      "tipo": "entrada_sinal",
+      "reservaId": "RSV-849202",
+      "codigoVoucher": "RSV-849202",
+      "agencia": "Matriz - Centro de Porto de Galinhas",
+      "valor": 200,
+      "formaPagamento": "cartao_credito",
+      "descricao": "Sinal recebido - Reserva RSV-849202 (Juliana Vasconcelos)",
+      "operadorNome": "Rogério Silva"
+    },
+    {
+      "id": "TX-03",
+      "store_id": "LOJA_001",
+      "dataHora": "2026-09-04T08:54:57.412Z",
+      "tipo": "entrada_sinal",
+      "reservaId": "RSV-849203",
+      "codigoVoucher": "RSV-849203",
+      "agencia": "Balcão - Vila de Porto (Rua Esperança)",
+      "valor": 100,
+      "formaPagamento": "pix",
+      "descricao": "Sinal recebido - Reserva RSV-849203 (Rodrigo Mendonça)",
+      "operadorNome": "Rogério Silva"
+    },
+    {
+      "id": "TX-04",
+      "store_id": "LOJA_001",
+      "dataHora": "2026-09-05T04:54:57.412Z",
+      "tipo": "entrada_saldo_embarque",
+      "reservaId": "RSV-849203",
+      "codigoVoucher": "RSV-849203",
+      "agencia": "Balcão - Vila de Porto (Rua Esperança)",
+      "valor": 180,
+      "formaPagamento": "pix",
+      "descricao": "Saldo de embarque recebido - RSV-849203 (Rodrigo Mendonça)",
+      "operadorNome": "Cláudio Santos (Motorista)"
+    },
+    {
+      "id": "TX-M01",
+      "store_id": "LOJA_002",
+      "dataHora": "2026-09-05T04:54:57.411Z",
+      "tipo": "entrada_sinal",
+      "reservaId": "RSV-M70010",
+      "codigoVoucher": "RSV-M70010",
+      "agencia": "Base Orla Central - Maragogi",
+      "valor": 162,
+      "formaPagamento": "pix",
+      "descricao": "Sinal recebido (PIX) - Mariana Fontes",
+      "operadorNome": "Aline Mendonça (Balcão Orla)"
+    }
+  ],
+  "fechamentos": [],
+  "telemetria": [
+    {
+      "id": "MOT-01",
+      "tipo": "motorista",
+      "nome": "José 'Zito' Bugueiro",
+      "telefone": "(81) 98711-2233",
+      "statusConexao": "sem_sinal",
+      "bateriaPct": null,
+      "velocidadeKmH": null,
+      "latitude": null,
+      "longitude": null,
+      "localizacaoNome": "Aguardando transmissão GPS do smartphone",
+      "regiao": "Ipojuca / Porto de Galinhas - PE",
+      "ultimoPing": null,
+      "precisaoMetros": null,
+      "operadoraCelular": null,
+      "detalhesOperacao": {
+        "veiculoOuPonto": "Buggy Selvagem 1.6 (#042)",
+        "placaOuChave": "BUG-8821",
+        "totalPassageirosOuVendasHoje": 4,
+        "valorAcumuladoHoje": 580,
+        "proximoPontoOuUltimoVoucher": "Aguardando início de rota",
+        "emMovimento": false
+      },
+      "historicoPontos": [],
+      "store_id": "LOJA_001"
+    },
+    {
+      "id": "MOT-02",
+      "tipo": "motorista",
+      "nome": "Cláudio Santos (Receptivo)",
+      "telefone": "(81) 99122-4455",
+      "statusConexao": "sem_sinal",
+      "bateriaPct": null,
+      "velocidadeKmH": null,
+      "latitude": null,
+      "longitude": null,
+      "localizacaoNome": "Aguardando transmissão GPS do smartphone",
+      "regiao": "Ipojuca / Porto de Galinhas - PE",
+      "ultimoPing": null,
+      "precisaoMetros": null,
+      "operadoraCelular": null,
+      "detalhesOperacao": {
+        "veiculoOuPonto": "Van Sprinter Executiva 415",
+        "placaOuChave": "PGT-4E19",
+        "totalPassageirosOuVendasHoje": 12,
+        "valorAcumuladoHoje": 1150,
+        "proximoPontoOuUltimoVoucher": "Aguardando início de rota",
+        "emMovimento": false
+      },
+      "historicoPontos": [],
+      "store_id": "LOJA_001"
+    },
+    {
+      "id": "MOT-03",
+      "tipo": "motorista",
+      "nome": "Marcos Vinícius",
+      "telefone": "(81) 99633-7788",
+      "statusConexao": "sem_sinal",
+      "bateriaPct": null,
+      "velocidadeKmH": null,
+      "latitude": null,
+      "longitude": null,
+      "localizacaoNome": "Aguardando transmissão GPS do smartphone",
+      "regiao": "Ipojuca / Porto de Galinhas - PE",
+      "ultimoPing": null,
+      "precisaoMetros": null,
+      "operadoraCelular": null,
+      "detalhesOperacao": {
+        "veiculoOuPonto": "Spin Executivo 7 Lugares",
+        "placaOuChave": "RCE-9A44",
+        "totalPassageirosOuVendasHoje": 4,
+        "valorAcumuladoHoje": 440,
+        "proximoPontoOuUltimoVoucher": "Aguardando início de rota",
+        "emMovimento": false
+      },
+      "historicoPontos": [],
+      "store_id": "LOJA_001"
+    },
+    {
+      "id": "MOT-04",
+      "tipo": "motorista",
+      "nome": "Capitão Beto",
+      "telefone": "(81) 98455-9900",
+      "statusConexao": "sem_sinal",
+      "bateriaPct": null,
+      "velocidadeKmH": null,
+      "latitude": null,
+      "longitude": null,
+      "localizacaoNome": "Aguardando transmissão GPS do smartphone",
+      "regiao": "Ipojuca / Porto de Galinhas - PE",
+      "ultimoPing": null,
+      "precisaoMetros": null,
+      "operadoraCelular": null,
+      "detalhesOperacao": {
+        "veiculoOuPonto": "Lancha Coral 26 VIP",
+        "placaOuChave": "MAR-0918-PE",
+        "totalPassageirosOuVendasHoje": 8,
+        "valorAcumuladoHoje": 1280,
+        "proximoPontoOuUltimoVoucher": "Aguardando início de rota",
+        "emMovimento": false
+      },
+      "historicoPontos": [],
+      "store_id": "LOJA_001"
+    },
+    {
+      "id": "VEN-02",
+      "tipo": "vendedor",
+      "nome": "Rogério Silva (Consultor Balcão)",
+      "telefone": "(81) 98661-1122",
+      "statusConexao": "sem_sinal",
+      "bateriaPct": null,
+      "velocidadeKmH": null,
+      "latitude": null,
+      "longitude": null,
+      "localizacaoNome": "Aguardando transmissão GPS do promotor",
+      "regiao": "Vila de Porto de Galinhas - PE",
+      "ultimoPing": null,
+      "precisaoMetros": null,
+      "operadoraCelular": null,
+      "detalhesOperacao": {
+        "veiculoOuPonto": "Matriz - Centro de Porto de Galinhas",
+        "placaOuChave": "Chave PIX: rogerio@gmail.com",
+        "totalPassageirosOuVendasHoje": 5,
+        "valorAcumuladoHoje": 1150,
+        "proximoPontoOuUltimoVoucher": "Atendimento presencial",
+        "emMovimento": false
+      },
+      "historicoPontos": [],
+      "store_id": "LOJA_001"
+    },
+    {
+      "id": "VEN-03",
+      "tipo": "vendedor",
+      "nome": "Camila Pousadas (Concierge Cupe)",
+      "telefone": "(81) 99344-5566",
+      "statusConexao": "sem_sinal",
+      "bateriaPct": null,
+      "velocidadeKmH": null,
+      "latitude": null,
+      "longitude": null,
+      "localizacaoNome": "Aguardando transmissão GPS do promotor",
+      "regiao": "Praia do Cupe - PE",
+      "ultimoPing": null,
+      "precisaoMetros": null,
+      "operadoraCelular": null,
+      "detalhesOperacao": {
+        "veiculoOuPonto": "Ponto Concierge Cupe Resorts",
+        "placaOuChave": "Chave PIX: (81) 99344-5566",
+        "totalPassageirosOuVendasHoje": 4,
+        "valorAcumuladoHoje": 580,
+        "proximoPontoOuUltimoVoucher": "Atendimento presencial",
+        "emMovimento": false
+      },
+      "historicoPontos": [],
+      "store_id": "LOJA_001"
+    },
+    {
+      "id": "VEN-04",
+      "tipo": "vendedor",
+      "nome": "Manoel 'Neto' (Promotor Orla)",
+      "telefone": "(81) 98555-4433",
+      "statusConexao": "sem_sinal",
+      "bateriaPct": null,
+      "velocidadeKmH": null,
+      "latitude": null,
+      "longitude": null,
+      "localizacaoNome": "Aguardando transmissão GPS do promotor",
+      "regiao": "Vila de Porto de Galinhas - PE",
+      "ultimoPing": null,
+      "precisaoMetros": null,
+      "operadoraCelular": null,
+      "detalhesOperacao": {
+        "veiculoOuPonto": "Orla - Calçadão das Piscinas Naturais",
+        "placaOuChave": "Chave PIX: manoelneto.pix@banco.com",
+        "totalPassageirosOuVendasHoje": 2,
+        "valorAcumuladoHoje": 320,
+        "proximoPontoOuUltimoVoucher": "Atendimento presencial",
+        "emMovimento": false
+      },
+      "historicoPontos": [],
+      "store_id": "LOJA_001"
+    }
+  ],
+  "tabuaMares": [
+    {
+      "data": "2026-08-21",
+      "horarioBaixa": "08:15",
+      "alturaBaixa": 0.1,
+      "horarioAlta": "14:35",
+      "alturaAlta": 2.2,
+      "coeficiente": "Maré Viva / Lua Nova",
+      "recomendacaoPiscinas": "perfeita",
+      "janelaIdealPiscinas": "06:45 às 10:00"
+    },
+    {
+      "data": "2026-08-22",
+      "horarioBaixa": "09:02",
+      "alturaBaixa": 0.2,
+      "horarioAlta": "15:20",
+      "alturaAlta": 2.1,
+      "coeficiente": "Maré Viva / Lua Nova",
+      "recomendacaoPiscinas": "perfeita",
+      "janelaIdealPiscinas": "07:30 às 10:45"
+    },
+    {
+      "data": "2026-08-23",
+      "horarioBaixa": "09:50",
+      "alturaBaixa": 0.3,
+      "horarioAlta": "16:05",
+      "alturaAlta": 2,
+      "coeficiente": "Maré Excelente",
+      "recomendacaoPiscinas": "perfeita",
+      "janelaIdealPiscinas": "08:15 às 11:30"
+    },
+    {
+      "data": "2026-08-24",
+      "horarioBaixa": "10:38",
+      "alturaBaixa": 0.4,
+      "horarioAlta": "16:52",
+      "alturaAlta": 1.9,
+      "coeficiente": "Maré Boa",
+      "recomendacaoPiscinas": "boa",
+      "janelaIdealPiscinas": "09:00 às 12:15"
+    },
+    {
+      "data": "2026-08-25",
+      "horarioBaixa": "11:30",
+      "alturaBaixa": 0.5,
+      "horarioAlta": "17:45",
+      "alturaAlta": 1.8,
+      "coeficiente": "Maré Moderada",
+      "recomendacaoPiscinas": "boa",
+      "janelaIdealPiscinas": "10:00 às 13:00"
+    },
+    {
+      "data": "2026-08-26",
+      "horarioBaixa": "12:28",
+      "alturaBaixa": 0.7,
+      "horarioAlta": "18:40",
+      "alturaAlta": 1.7,
+      "coeficiente": "Maré de Quarto Crescente",
+      "recomendacaoPiscinas": "regular",
+      "janelaIdealPiscinas": "11:15 às 13:45"
+    },
+    {
+      "data": "2026-08-27",
+      "horarioBaixa": "13:35",
+      "alturaBaixa": 0.8,
+      "horarioAlta": "07:20",
+      "alturaAlta": 1.6,
+      "coeficiente": "Maré Morta",
+      "recomendacaoPiscinas": "inapropriada",
+      "janelaIdealPiscinas": "Apenas praia seca / Passeios terrestres"
+    }
+  ],
+  "updatedAt": "2026-09-05T05:05:37.970Z",
+  "version": 3
+}

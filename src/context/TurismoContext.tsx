@@ -40,6 +40,17 @@ import {
 } from '../data/lojasAuthData';
 import toast from 'react-hot-toast';
 
+// Dados usados para cadastrar/atualizar um vendedor com acesso individual ao PDV
+export interface DadosVendedorAcesso {
+  nome: string;
+  cpfDocumento?: string;
+  telefone: string;
+  email: string; // e-mail ou usuário de acesso
+  senha?: string; // obrigatória na criação; opcional na edição (mantém a atual se vazia)
+  comissaoPct: number;
+  ativo: boolean;
+}
+
 interface TurismoContextType {
   // Sincronização em Tempo Real Multidispositivo (Nuvem Firestore)
   syncStatus: 'online' | 'sincronizando' | 'offline' | 'erro';
@@ -109,6 +120,11 @@ interface TurismoContextType {
   vendedores: PromotorVendedor[];
   adicionarVendedor: (ven: Omit<PromotorVendedor, 'id'>) => void;
   atualizarVendedor: (id: string, dados: Partial<PromotorVendedor>) => void;
+
+  // Vendedores com ACESSO INDIVIDUAL (login próprio restrito ao PDV)
+  cadastrarVendedorComAcesso: (dados: DadosVendedorAcesso) => { sucesso: boolean; mensagem?: string };
+  atualizarVendedorComAcesso: (vendedorId: string, dados: DadosVendedorAcesso) => { sucesso: boolean; mensagem?: string };
+  excluirVendedorComAcesso: (vendedorId: string) => void;
 
   // Rastreio de Colaboradores Isolados por Loja
   telemetriaColaboradores: TelemetriaColaborador[];
@@ -764,7 +780,8 @@ export const TurismoProvider: React.FC<{ children: React.ReactNode }> = ({ child
     // Autentica e isola estritamente na loja do usuário
     setUsuarioAutenticado(usuarioEncontrado);
     setLojaAtivaId(usuarioEncontrado.store_id);
-    setActiveTab('dashboard');
+    // Vendedor tem acesso exclusivo ao PDV / Nova Reserva
+    setActiveTab(usuarioEncontrado.perfil === 'vendedor' ? 'reservas' : 'dashboard');
     return { sucesso: true };
   };
 
@@ -805,7 +822,7 @@ export const TurismoProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
     setUsuarioAutenticado(usuarioEncontrado);
     setLojaAtivaId(usuarioEncontrado.store_id);
-    setActiveTab('dashboard');
+    setActiveTab(usuarioEncontrado.perfil === 'vendedor' ? 'reservas' : 'dashboard');
     return { sucesso: true, perfil: usuarioEncontrado.perfil };
   };
 
@@ -1115,6 +1132,168 @@ export const TurismoProvider: React.FC<{ children: React.ReactNode }> = ({ child
     });
     setTodosOsVendedores(novas);
     salvarNoFirestore({ vendedores: novas });
+  };
+
+  // -------------------------------------------------------------
+  // VENDEDORES COM ACESSO INDIVIDUAL AO PDV
+  // Cria/atualiza simultaneamente o registro do vendedor (PromotorVendedor)
+  // e o usuário de acesso (UsuarioAuth perfil 'vendedor') vinculado à loja ativa.
+  // Somente perfis administrativos podem gerir; vendedores nunca.
+  // -------------------------------------------------------------
+  const derivarLogin = (email: string) => {
+    const e = email.trim();
+    return (e.includes('@') ? e.split('@')[0] : e).toLowerCase();
+  };
+
+  const cadastrarVendedorComAcesso = (dados: DadosVendedorAcesso): { sucesso: boolean; mensagem?: string } => {
+    if (usuarioAutenticado?.perfil === 'vendedor') {
+      return { sucesso: false, mensagem: 'Acesso não autorizado.' };
+    }
+    const emailFinal = dados.email.trim();
+    const loginFinal = derivarLogin(emailFinal);
+    const senhaFinal = (dados.senha || '').trim();
+
+    if (!dados.nome.trim() || !emailFinal || !senhaFinal) {
+      return { sucesso: false, mensagem: 'Nome, e-mail/usuário e senha são obrigatórios.' };
+    }
+
+    // Login/e-mail deve ser único em todo o sistema
+    const jaExiste = usuariosSistema.some(u =>
+      u.usuarioLogin.toLowerCase() === loginFinal || u.email.toLowerCase() === emailFinal.toLowerCase()
+    );
+    if (jaExiste) {
+      return { sucesso: false, mensagem: 'Já existe um acesso com este e-mail/usuário.' };
+    }
+
+    const vendedorId = `VEN-${Date.now().toString().slice(-5)}`;
+    const novoVendedor: PromotorVendedor = {
+      id: vendedorId,
+      store_id: currentStoreId,
+      nome: dados.nome.trim(),
+      tipo: 'balcao_loja',
+      comissaoPadraoPct: dados.comissaoPct,
+      telefone: dados.telefone.trim(),
+      ativo: dados.ativo,
+      cpfDocumento: dados.cpfDocumento?.trim() || '',
+      email: emailFinal,
+      usuarioLogin: loginFinal,
+      temAcesso: true
+    };
+
+    const novoUsuario: UsuarioAuth = {
+      id: `USR-VEN-${Date.now().toString().slice(-5)}`,
+      nome: dados.nome.trim(),
+      email: emailFinal,
+      usuarioLogin: loginFinal,
+      senha: senhaFinal,
+      perfil: 'vendedor',
+      store_id: currentStoreId,
+      nomeLoja: lojaAtiva?.nome,
+      status: dados.ativo ? 'ativo' : 'inativo',
+      ultimoAcesso: new Date().toISOString(),
+      vendedorId,
+      comissaoPct: dados.comissaoPct
+    };
+
+    const novosVendedores = [...todosOsVendedores, novoVendedor];
+    const novosUsuarios = [...usuariosSistema, novoUsuario];
+    setTodosOsVendedores(novosVendedores);
+    setUsuariosSistema(novosUsuarios);
+    salvarNoFirestore({ vendedores: novosVendedores, usuarios: novosUsuarios });
+    return { sucesso: true };
+  };
+
+  const atualizarVendedorComAcesso = (vendedorId: string, dados: DadosVendedorAcesso): { sucesso: boolean; mensagem?: string } => {
+    if (usuarioAutenticado?.perfil === 'vendedor') {
+      return { sucesso: false, mensagem: 'Acesso não autorizado.' };
+    }
+    const emailFinal = dados.email.trim();
+    const loginFinal = derivarLogin(emailFinal);
+    const senhaNova = (dados.senha || '').trim();
+
+    if (!dados.nome.trim() || !emailFinal) {
+      return { sucesso: false, mensagem: 'Nome e e-mail/usuário são obrigatórios.' };
+    }
+
+    // Localiza o usuário de acesso vinculado a este vendedor (na loja ativa)
+    const usuarioVinculado = usuariosSistema.find(u => u.perfil === 'vendedor' && u.vendedorId === vendedorId);
+
+    // Valida unicidade do login/e-mail ignorando o próprio usuário
+    const conflito = usuariosSistema.some(u =>
+      (!usuarioVinculado || u.id !== usuarioVinculado.id) &&
+      (u.usuarioLogin.toLowerCase() === loginFinal || u.email.toLowerCase() === emailFinal.toLowerCase())
+    );
+    if (conflito) {
+      return { sucesso: false, mensagem: 'Já existe um acesso com este e-mail/usuário.' };
+    }
+
+    const novosVendedores = todosOsVendedores.map(v => {
+      if (v.id === vendedorId && (v.store_id || 'LOJA_001') === currentStoreId) {
+        return {
+          ...v,
+          nome: dados.nome.trim(),
+          comissaoPadraoPct: dados.comissaoPct,
+          telefone: dados.telefone.trim(),
+          ativo: dados.ativo,
+          cpfDocumento: dados.cpfDocumento?.trim() || '',
+          email: emailFinal,
+          usuarioLogin: loginFinal,
+          temAcesso: true
+        };
+      }
+      return v;
+    });
+
+    let novosUsuarios = usuariosSistema;
+    if (usuarioVinculado) {
+      novosUsuarios = usuariosSistema.map(u => {
+        if (u.id === usuarioVinculado.id) {
+          return {
+            ...u,
+            nome: dados.nome.trim(),
+            email: emailFinal,
+            usuarioLogin: loginFinal,
+            ...(senhaNova ? { senha: senhaNova } : {}),
+            status: dados.ativo ? 'ativo' as const : 'inativo' as const,
+            comissaoPct: dados.comissaoPct
+          };
+        }
+        return u;
+      });
+    } else if (senhaNova) {
+      // Vendedor antigo sem acesso: cria o usuário de acesso agora
+      novosUsuarios = [...usuariosSistema, {
+        id: `USR-VEN-${Date.now().toString().slice(-5)}`,
+        nome: dados.nome.trim(),
+        email: emailFinal,
+        usuarioLogin: loginFinal,
+        senha: senhaNova,
+        perfil: 'vendedor',
+        store_id: currentStoreId,
+        nomeLoja: lojaAtiva?.nome,
+        status: dados.ativo ? 'ativo' : 'inativo',
+        ultimoAcesso: new Date().toISOString(),
+        vendedorId,
+        comissaoPct: dados.comissaoPct
+      }];
+    }
+
+    setTodosOsVendedores(novosVendedores);
+    setUsuariosSistema(novosUsuarios);
+    salvarNoFirestore({ vendedores: novosVendedores, usuarios: novosUsuarios });
+    return { sucesso: true };
+  };
+
+  const excluirVendedorComAcesso = (vendedorId: string) => {
+    if (usuarioAutenticado?.perfil === 'vendedor') {
+      toast.error('Acesso não autorizado.');
+      return;
+    }
+    const novosVendedores = todosOsVendedores.filter(v => !(v.id === vendedorId && (v.store_id || 'LOJA_001') === currentStoreId));
+    const novosUsuarios = usuariosSistema.filter(u => !(u.perfil === 'vendedor' && u.vendedorId === vendedorId));
+    setTodosOsVendedores(novosVendedores);
+    setUsuariosSistema(novosUsuarios);
+    salvarNoFirestore({ vendedores: novosVendedores, usuarios: novosUsuarios });
   };
 
   // -------------------------------------------------------------
@@ -1574,6 +1753,9 @@ export const TurismoProvider: React.FC<{ children: React.ReactNode }> = ({ child
         vendedores,
         adicionarVendedor,
         atualizarVendedor,
+        cadastrarVendedorComAcesso,
+        atualizarVendedorComAcesso,
+        excluirVendedorComAcesso,
         telemetriaColaboradores,
         atualizarTelemetriaColaborador,
         solicitarPingCelular,
